@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vigil Fire — the SANS-compliant fire equipment register</title>
+<meta name="description" content="Vigil Fire is a field-first fire equipment register for South African servicing companies. Site registers, servicing, pressure tests, recharges, monthly inspections and calibration — built around SANS 1475, SANS 10105-1 and SANS 543.">
+<meta name="theme-color" content="#191C20">
+<link rel="canonical" href="https://vigilfire.co.za/">
+
+<!-- Open Graph / social -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vigil Fire — the SANS-compliant fire equipment register">
+<meta property="og:description" content="Retire the paper register. Site records, servicing, pressure tests, recharges, monthly inspections and calibration — built around SANS 1475 and SANS 10105-1.">
+<meta property="og:url" content="https://vigilfire.co.za/">
+<!-- TODO: add a real 1200x630 preview image and point og:image at it -->
+<meta property="og:image" content="https://vigilfire.co.za/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%23C8102E'/%3E%3Cpath d='M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z' fill='none' stroke='white' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+<style>
+  /* ============================================================
+     Vigil Fire — marketing site
+     Field-service / industrial: charcoal + a single strong red,
+     high-contrast neutrals, no decoration for its own sake.
+     ============================================================ */
+  :root{
+    --ink:#16181C;
+    --ink-2:#3C4249;
+    --muted:#5B626B;
+    --bg:#FFFFFF;
+    --bg-2:#F4F5F7;
+    --charcoal:#191C20;
+    --charcoal-2:#23272C;
+    --red:#C8102E;
+    --red-dark:#9A0C22;
+    --line:#E3E6EA;
+    --line-dark:#33383E;
+    --radius:12px;
+    --maxw:1120px;
+    color-scheme:light;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{color:var(--red); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  h1,h2,h3{margin:0 0 .5em; font-weight:700; letter-spacing:-0.02em; line-height:1.15;}
+  h1{font-size:clamp(2.1rem,5.2vw,3.5rem);}
+  h2{font-size:clamp(1.6rem,3.6vw,2.4rem);}
+  h3{font-size:1.12rem; letter-spacing:-0.01em;}
+  p{margin:0 0 1em;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 20px;}
+  .section{padding:72px 0;}
+  .section.tight{padding:48px 0;}
+  .bg-2{background:var(--bg-2);}
+  .eyebrow{display:block; text-transform:uppercase; letter-spacing:.14em; font-size:.72rem; font-weight:700; color:var(--red); margin-bottom:12px;}
+  .lead{font-size:1.12rem; color:var(--ink-2); max-width:56ch;}
+  .center{text-align:center;}
+  .center .lead{margin-left:auto; margin-right:auto;}
+
+  /* Buttons */
+  .btn{display:inline-flex; align-items:center; gap:8px; background:var(--red); color:#fff; font-weight:650;
+    padding:13px 22px; border-radius:9px; border:none; cursor:pointer; font-size:.98rem; letter-spacing:.01em;}
+  .btn:hover{background:var(--red-dark); text-decoration:none;}
+  .btn.ghost{background:transparent; color:var(--ink); border:1px solid var(--line);}
+  .btn.ghost:hover{background:var(--bg-2);}
+  .btn.on-dark{background:#fff; color:var(--ink);}
+  .btn.on-dark:hover{background:#e9eaec;}
+  .btn.outline-dark{background:transparent; color:#fff; border:1px solid rgba(255,255,255,.3);}
+  .btn.outline-dark:hover{background:rgba(255,255,255,.08);}
+  .btn svg{width:17px; height:17px;}
+
+  /* Header */
+  header.nav{position:sticky; top:0; z-index:50; background:var(--charcoal); color:#fff; border-bottom:3px solid var(--red);}
+  .nav-in{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .brand{display:flex; align-items:center; gap:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; font-size:.98rem; color:#fff;}
+  .brand:hover{text-decoration:none;}
+  .brand .mark{width:32px; height:32px; border-radius:7px; background:var(--red); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .brand .mark svg{width:19px; height:19px; stroke:#fff; fill:none;}
+  .nav-links{display:flex; align-items:center; gap:26px;}
+  .nav-links a{color:#c9ccd1; font-size:.92rem; font-weight:500;}
+  .nav-links a:hover{color:#fff; text-decoration:none;}
+  .nav-cta{display:flex; align-items:center; gap:12px;}
+  .nav-cta .login{color:#fff; font-weight:600; font-size:.92rem;}
+  .nav-toggle{display:none; background:none; border:1px solid rgba(255,255,255,.25); border-radius:7px; width:38px; height:38px; color:#fff; cursor:pointer;}
+  .nav-toggle svg{width:20px; height:20px;}
+
+  /* Hero (continues the dark header) */
+  .hero{background:var(--charcoal); color:#fff; padding:64px 0 140px;}
+  .hero .eyebrow{color:#ff6079;}
+  .hero h1{color:#fff; max-width:16ch;}
+  .hero .lead{color:#c9ccd1; font-size:1.2rem;}
+  .hero-actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:28px;}
+  .hero-note{margin-top:20px; font-size:.85rem; color:#8a9099; display:flex; align-items:center; gap:8px;}
+  .hero-note svg{width:15px; height:15px; stroke:#8a9099; fill:none;}
+
+  /* Screenshot frame that overlaps the dark → light seam */
+  .shot-wrap{max-width:var(--maxw); margin:-104px auto 0; padding:0 20px; position:relative; z-index:2;}
+  .shot{background:#fff; border:1px solid var(--line); border-radius:var(--radius); box-shadow:0 24px 60px -20px rgba(20,22,26,.35); overflow:hidden;}
+  .shot .bar{height:38px; background:var(--bg-2); border-bottom:1px solid var(--line); display:flex; align-items:center; gap:7px; padding:0 14px;}
+  .shot .bar i{width:10px; height:10px; border-radius:50%; background:#cdd2d8; display:block;}
+  .shot .ph{aspect-ratio:16/9; background:
+      repeating-linear-gradient(45deg,#f7f8fa,#f7f8fa 12px,#f1f3f5 12px,#f1f3f5 24px);
+      display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:.9rem; text-align:center; padding:24px;}
+  /* Replace .ph with:  <img src="screens/dashboard.png" alt="Vigil Fire site register"> */
+
+  /* Trust bar */
+  .trust{border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .trust .wrap{display:flex; flex-wrap:wrap; align-items:center; gap:10px 30px; padding-top:22px; padding-bottom:22px; font-size:.86rem; color:var(--muted);}
+  .trust strong{color:var(--ink-2); font-weight:650;}
+  .trust .std{display:inline-flex; align-items:center; gap:7px; font-weight:600; color:var(--ink-2);}
+  .trust .std::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--red); display:block;}
+
+  /* Feature grid */
+  .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:36px;}
+  .card{background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:24px;}
+  .card .ic{width:42px; height:42px; border-radius:9px; background:#fdecef; display:flex; align-items:center; justify-content:center; margin-bottom:14px;}
+  .card .ic svg{width:22px; height:22px; stroke:var(--red); fill:none;}
+  .card h3{margin-bottom:6px;}
+  .card p{margin:0; color:var(--muted); font-size:.94rem;}
+
+  /* Split rows */
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;}
+  .split.reverse .txt{order:2;}
+  .check-list{list-style:none; margin:18px 0 0; padding:0;}
+  .check-list li{position:relative; padding:8px 0 8px 30px; color:var(--ink-2);}
+  .check-list li::before{content:""; position:absolute; left:0; top:14px; width:16px; height:16px;
+    background:var(--red); border-radius:4px;
+    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/12px no-repeat;
+            mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/12px no-repeat;}
+
+  /* Steps */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:36px; counter-reset:step;}
+  .step{background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:24px;}
+  .step::before{counter-increment:step; content:"0" counter(step); font-weight:800; color:var(--red); font-size:1.1rem; letter-spacing:.02em;}
+  .step h3{margin:10px 0 6px;}
+  .step p{margin:0; color:var(--muted); font-size:.94rem;}
+
+  /* Compliance panel */
+  .panel{background:var(--charcoal); color:#fff; border-radius:16px; padding:44px; border-top:3px solid var(--red);}
+  .panel h2{color:#fff;}
+  .panel .lead{color:#c4c8cd;}
+  .panel .std-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:26px;}
+  .panel .std-card{background:var(--charcoal-2); border:1px solid var(--line-dark); border-radius:10px; padding:18px;}
+  .panel .std-card b{display:block; font-size:.95rem; margin-bottom:4px;}
+  .panel .std-card span{font-size:.86rem; color:#9aa0a7;}
+
+  /* CTA band */
+  .cta-band{background:var(--red); color:#fff; text-align:center;}
+  .cta-band h2{color:#fff;}
+  .cta-band p{color:#ffdfe4; max-width:52ch; margin-left:auto; margin-right:auto;}
+
+  /* Contact */
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start;}
+  form.contact{display:grid; gap:14px;}
+  form.contact label{font-size:.8rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); margin-bottom:-6px;}
+  form.contact input, form.contact textarea{width:100%; padding:12px 13px; border:1px solid var(--line); border-radius:8px; font:inherit; background:#fff; color:var(--ink);}
+  form.contact textarea{min-height:120px; resize:vertical;}
+  form.contact input:focus, form.contact textarea:focus{outline:2px solid var(--red); outline-offset:1px;}
+  .contact-detail{font-size:.95rem;}
+  .contact-detail dt{font-weight:700; color:var(--ink-2); margin-top:14px; font-size:.8rem; text-transform:uppercase; letter-spacing:.05em;}
+  .contact-detail dd{margin:2px 0 0;}
+
+  /* Footer */
+  footer{background:var(--charcoal); color:#9aa0a7; font-size:.88rem;}
+  footer .wrap{padding-top:40px; padding-bottom:40px;}
+  footer .cols{display:flex; flex-wrap:wrap; justify-content:space-between; gap:24px; align-items:flex-start;}
+  footer a{color:#c9ccd1;}
+  footer .foot-links{display:flex; gap:22px; flex-wrap:wrap;}
+  footer .fine{margin-top:26px; padding-top:20px; border-top:1px solid var(--line-dark); color:#7b828a;}
+
+  @media (max-width:900px){
+    .grid, .steps, .panel .std-grid{grid-template-columns:1fr 1fr;}
+    .split{grid-template-columns:1fr; gap:28px;}
+    .split.reverse .txt{order:0;}
+    .contact-grid{grid-template-columns:1fr; gap:28px;}
+  }
+  @media (max-width:680px){
+    .section{padding:52px 0;}
+    .nav-links{display:none;}
+    .nav-links.open{display:flex; position:absolute; left:0; right:0; top:64px; flex-direction:column; align-items:stretch; gap:0;
+      background:var(--charcoal-2); border-bottom:1px solid var(--line-dark); padding:6px 0;}
+    .nav-links.open a{padding:12px 20px;}
+    .nav-cta .login{display:none;}
+    .nav-cta .btn{padding:9px 14px; font-size:.88rem;}
+    .nav-toggle{display:inline-flex; align-items:center; justify-content:center;}
+    .shot .ph{aspect-ratio:4/3;}
+    .grid, .steps, .panel .std-grid{grid-template-columns:1fr;}
+    .hero{padding-bottom:120px;}
+    .shot-wrap{margin-top:-88px;}
+    .panel{padding:28px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span>
+      Vigil&nbsp;Fire
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#compliance">Compliance</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <!-- TODO: point at your deployed app, e.g. https://app.vigilfire.co.za -->
+      <a class="login" href="https://app.vigilfire.co.za">Log in</a>
+      <a class="btn" href="#contact">Book a demo</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow">Fire equipment register &amp; servicing</span>
+    <h1>Retire the paper register.</h1>
+    <p class="lead">Vigil Fire is a field-first register for South African fire equipment servicing companies. Your technicians service equipment on site — online or off — and the site register, service certificate and every SANS report come out the other side.</p>
+    <div class="hero-actions">
+      <a class="btn on-dark" href="#contact">Book a demo</a>
+      <a class="btn outline-dark" href="#features">See what it does</a>
+    </div>
+    <div class="hero-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 2 20 20M8.5 16.4A5 5 0 0 1 12 15a5 5 0 0 1 3.5 1.4M5 12.9a10 10 0 0 1 3-1.9M19 12.9a10 10 0 0 0-4.6-2.6M2 8.8a15 15 0 0 1 4.2-2.5M22 8.8a15 15 0 0 0-8.4-4.4"/><circle cx="12" cy="20" r="1"/></svg>
+      Works offline in the field. Syncs automatically when signal returns.
+    </div>
+  </div>
+</section>
+
+<div class="shot-wrap">
+  <div class="shot">
+    <div class="bar"><i></i><i></i><i></i></div>
+    <!-- TODO: replace this placeholder with a real screenshot:
+         <img src="screens/site-register.png" alt="Vigil Fire — printable site register"> -->
+    <div class="ph">Screenshot — a site register with its equipment list, due items and printable output</div>
+  </div>
+</div>
+
+<!-- ================= TRUST BAR ================= -->
+<div class="trust">
+  <div class="wrap">
+    <strong>Built around the standards South African servicing companies work to:</strong>
+    <span class="std">SANS&nbsp;1475-1</span>
+    <span class="std">SANS&nbsp;10105-1</span>
+    <span class="std">SANS&nbsp;543</span>
+    <span class="std">SAQCC-registered technicians</span>
+  </div>
+</div>
+
+<!-- ================= PROBLEM ================= -->
+<section class="section">
+  <div class="wrap">
+    <span class="eyebrow">The problem</span>
+    <h2>Compliance lives on clipboards and in someone's head</h2>
+    <p class="lead">Service labels get overwritten. The register is a folder that's out of date the day it's printed. Pressure-test and recharge dates get missed. When an inspector or an insurer asks for three years of records, the scramble begins.</p>
+  </div>
+</section>
+
+<!-- ================= FEATURES ================= -->
+<section class="section bg-2" id="features">
+  <div class="wrap">
+    <span class="eyebrow">What Vigil Fire does</span>
+    <h2>Everything a service visit produces, in one place</h2>
+    <p class="lead">One combined form per unit — identity, service, inspection checklist, pressure test, recharge — no jumping between screens.</p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4"/></svg></div>
+        <h3>Site registers</h3>
+        <p>Every site's equipment, current status and what's due — one tap to a multi-page printable register or a certificate of service.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></div>
+        <h3>Servicing &amp; inspection</h3>
+        <p>Type-specific checklists, auto next-service dates, recorded mass at service, and every-visit seal renewal — all on the one form.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14 16 10"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></div>
+        <h3>Pressure &amp; hydrostatic tests</h3>
+        <p>5- and 10-year intervals tracked from the last test. Record the Annex&nbsp;G procedure, test pressure and result — with the technician's SAQCC number.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/></svg></div>
+        <h3>Recharge workflow</h3>
+        <p>Flag a unit for recharge and it stays on the Due list until it's back and logged — pressure before and after, medium and checklist. The register won't generate while a recharge is outstanding.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M9 16l2 2 4-4"/></svg></div>
+        <h3>Monthly inspections</h3>
+        <p>The SANS&nbsp;10105-1 responsible-person walk-through, per site, with a printable rolling 12-month log to leave on the clipboard.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 21h14M3 7l3-4 3 4a3 3 0 0 1-6 0ZM15 7l3-4 3 4a3 3 0 0 1-6 0Z"/></svg></div>
+        <h3>Calibration register</h3>
+        <p>Weekly checks of your workshop scales and pressure gauges against reference instruments (SANS&nbsp;1475 Annex&nbsp;A), assignable to a named technician.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Technicians &amp; permissions</h3>
+        <p>SAQCC registration numbers on every record. Assign technicians to sites, grant calibration rights, and deactivate a leaver without losing their history.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+        <h3>Letterheaded reports</h3>
+        <p>Site register, certificate of service, pressure-test report, recharge report and monthly log — all headed with your company profile, print or save as PDF.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <h3>Records that hold up</h3>
+        <p>An immutable audit trail behind every change, plus a scheduled full backup — so the SANS three-year retention requirement is genuinely met.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SPLIT: condemning ================= -->
+<section class="section">
+  <div class="wrap split">
+    <div class="txt">
+      <span class="eyebrow">Nothing slips</span>
+      <h2>The Due list is the day's work</h2>
+      <p>Every site, every unit, one screen: overdue services, pressure tests coming up, CO₂ weight checks, hose-reel replacements and outstanding recharges — sorted so the most urgent is first.</p>
+      <ul class="check-list">
+        <li>Condemned units are marked, dated and reason-coded per SANS&nbsp;1475 clause&nbsp;5.2.6, then dropped from the live count</li>
+        <li>Replacement units link back to what they replaced</li>
+        <li>A site tagged "monthly inspection" opens straight to its check form</li>
+      </ul>
+    </div>
+    <div class="shot">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <!-- TODO: <img src="screens/due-list.png" alt="Due &amp; overdue across every site"> -->
+      <div class="ph">Screenshot — the Due &amp; overdue dashboard</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SPLIT: offline ================= -->
+<section class="section bg-2">
+  <div class="wrap split reverse">
+    <div class="txt">
+      <span class="eyebrow">Built for the field</span>
+      <h2>No signal in the basement? No problem.</h2>
+      <p>Vigil Fire installs like an app and works fully offline. A technician can service an entire building with no reception; everything syncs the moment they're back on the network. An online/offline indicator tells them where they stand.</p>
+      <ul class="check-list">
+        <li>Installable on any phone or tablet — nothing to download from a store</li>
+        <li>Photos captured on site, resized and uploaded automatically</li>
+        <li>Roles keep technicians to their assigned sites; admins see everything</li>
+      </ul>
+    </div>
+    <div class="shot">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <!-- TODO: <img src="screens/equipment-form.png" alt="The combined equipment &amp; inspection form"> -->
+      <div class="ph">Screenshot — the combined equipment &amp; inspection form</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="section" id="how">
+  <div class="wrap">
+    <span class="eyebrow">How it works</span>
+    <h2>Three steps, then it runs itself</h2>
+    <div class="steps">
+      <div class="step">
+        <h3>Set up your sites</h3>
+        <p>Add each client site, assign the technicians who cover it, and enter your company letterhead once.</p>
+      </div>
+      <div class="step">
+        <h3>Service in the field</h3>
+        <p>Technicians open a unit, work through the checklist, record the test or recharge, and move on — online or off.</p>
+      </div>
+      <div class="step">
+        <h3>Generate &amp; file</h3>
+        <p>Sign the site off and print the register and certificate. Reports and the records backup are a tap away.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPLIANCE PANEL ================= -->
+<section class="section bg-2" id="compliance">
+  <div class="wrap">
+    <div class="panel">
+      <span class="eyebrow" style="color:#ff6079;">Written around the standards</span>
+      <h2>Not a generic asset tracker</h2>
+      <p class="lead">Every interval, checklist and record in Vigil Fire comes from the South African standards your work is judged against — so the app nudges you toward compliance instead of leaving it to memory.</p>
+      <div class="std-grid">
+        <div class="std-card">
+          <b>SANS 1475-1</b>
+          <span>Reconditioning of portable and wheeled rechargeable fire extinguishers — servicing intervals, the hydrostatic-test procedure (Annex&nbsp;G), recharge requirements, condemning criteria, labelling and the three-year record.</span>
+        </div>
+        <div class="std-card">
+          <b>SANS 10105-1</b>
+          <span>The use and control of fire-fighting equipment — the monthly responsible-person inspection and its on-site log.</span>
+        </div>
+        <div class="std-card">
+          <b>SANS 543 &amp; Annex A</b>
+          <span>Hose-reel replacement intervals, and weekly calibration of the workshop's production-control equipment against reference instruments.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA BAND ================= -->
+<section class="section tight cta-band">
+  <div class="wrap center">
+    <h2>Ready to see it on your own sites?</h2>
+    <p>We'll walk you through Vigil Fire with your equipment types, your report layout and your technicians — no obligation.</p>
+    <p style="margin-top:20px;"><a class="btn on-dark" href="#contact">Book a demo</a></p>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <span class="eyebrow">Get in touch</span>
+    <h2>Book a demo or ask a question</h2>
+    <div class="contact-grid">
+      <!--
+        This form posts to Formspree by default. Create a free form at
+        https://formspree.io, then replace {{FORM_ID}} below. Or, if you host on
+        Netlify, delete the action/method and add: <form name="contact" netlify>
+      -->
+      <form class="contact" action="https://formspree.io/f/{{FORM_ID}}" method="POST">
+        <label for="f-name">Name</label>
+        <input id="f-name" name="name" type="text" required autocomplete="name">
+        <label for="f-company">Company</label>
+        <input id="f-company" name="company" type="text" autocomplete="organization">
+        <label for="f-email">Email</label>
+        <input id="f-email" name="email" type="email" required autocomplete="email">
+        <label for="f-msg">How can we help?</label>
+        <textarea id="f-msg" name="message" required></textarea>
+        <button class="btn" type="submit">Send</button>
+      </form>
+
+      <dl class="contact-detail">
+        <dt>Email</dt>
+        <dd><a href="mailto:hello@vigilfire.co.za">hello@vigilfire.co.za</a></dd>
+        <dt>Phone</dt>
+        <dd><a href="tel:+27000000000">+27 (0)00 000 0000</a></dd>
+        <dt>Already a customer?</dt>
+        <dd><a href="https://app.vigilfire.co.za">Log in to Vigil Fire</a></dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <a class="brand" href="#top">
+        <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span>
+        Vigil&nbsp;Fire
+      </a>
+      <nav class="foot-links">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#compliance">Compliance</a>
+        <a href="#contact">Contact</a>
+        <a href="https://app.vigilfire.co.za">Log in</a>
+      </nav>
+    </div>
+    <div class="fine">
+      &copy; <span id="year">2026</span> Vigil Fire. <!-- TODO: Vigil Fire is a product of {{Your company (Pty) Ltd}}. -->
+      Standards referenced (SANS 1475-1, SANS 10105-1, SANS 543) are published by the South African Bureau of Standards; Vigil Fire is an independent tool and is not endorsed by the SABS or SAQCC.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav
+  var t = document.getElementById('navToggle'), l = document.getElementById('navLinks');
+  t.addEventListener('click', function(){ l.classList.toggle('open'); });
+  l.addEventListener('click', function(e){ if(e.target.tagName === 'A') l.classList.remove('open'); });
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
