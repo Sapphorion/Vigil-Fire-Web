@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vigil Fire — the SANS-compliant fire equipment register</title>
-<meta name="description" content="Vigil Fire is a field-first fire equipment register for South African servicing companies. Site registers, servicing, pressure tests, recharges, monthly inspections and calibration — built around SANS 1475, SANS 10105-1 and SANS 543.">
+<meta name="description" content="Vigil Fire is a field-first fire equipment register for South African servicing companies. Site registers, servicing, pressure tests, recharges, monthly inspections and calibration — built around SANS 1475-1, SANS 10105-1 and SANS 543.">
 <meta name="theme-color" content="#191C20">
 <link rel="canonical" href="https://vigilfire.co.za/">
 
 <!-- Open Graph / social -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Vigil Fire — the SANS-compliant fire equipment register">
-<meta property="og:description" content="Retire the paper register. Site records, servicing, pressure tests, recharges, monthly inspections and calibration — built around SANS 1475 and SANS 10105-1.">
+<meta property="og:description" content="Retire the paper register. Site records, servicing, pressure tests, recharges, monthly inspections and calibration — built around SANS 1475-1 and SANS 10105-1.">
 <meta property="og:url" content="https://vigilfire.co.za/">
 <!-- TODO: add a real 1200x630 preview image and point og:image at it -->
 <meta property="og:image" content="https://vigilfire.co.za/og-image.png">
@@ -215,8 +215,7 @@
       <a href="#contact">Contact</a>
     </nav>
     <div class="nav-cta">
-      <!-- TODO: point at your deployed app, e.g. https://app.vigilfire.co.za -->
-      <a class="login" href="https://app.vigilfire.co.za">Log in</a>
+      <a class="login" href="https://vigilfire.github.io/app/">Log in</a>
       <a class="btn" href="#contact">Book a demo</a>
       <button class="nav-toggle" id="navToggle" aria-label="Menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -307,7 +306,7 @@
       <div class="card">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 21h14M3 7l3-4 3 4a3 3 0 0 1-6 0ZM15 7l3-4 3 4a3 3 0 0 1-6 0Z"/></svg></div>
         <h3>Calibration register</h3>
-        <p>Weekly checks of your workshop scales and pressure gauges against reference instruments (SANS&nbsp;1475 Annex&nbsp;A), assignable to a named technician.</p>
+        <p>Weekly checks of your workshop scales and pressure gauges against reference instruments (SANS&nbsp;1475-1 Annex&nbsp;A), assignable to a named technician.</p>
       </div>
       <div class="card">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
@@ -336,7 +335,7 @@
       <h2>The Due list is the day's work</h2>
       <p>Every site, every unit, one screen: overdue services, pressure tests coming up, CO₂ weight checks, hose-reel replacements and outstanding recharges — sorted so the most urgent is first.</p>
       <ul class="check-list">
-        <li>Condemned units are marked, dated and reason-coded per SANS&nbsp;1475 clause&nbsp;5.2.6, then dropped from the live count</li>
+        <li>Condemned units are marked, dated and reason-coded per SANS&nbsp;1475-1 clause&nbsp;5.2.6, then dropped from the live count</li>
         <li>Replacement units link back to what they replaced</li>
         <li>A site tagged "monthly inspection" opens straight to its check form</li>
       </ul>
@@ -409,7 +408,7 @@
           <span>The use and control of fire-fighting equipment — the monthly responsible-person inspection and its on-site log.</span>
         </div>
         <div class="std-card">
-          <b>SANS 543 &amp; Annex A</b>
+          <b>SANS 543 &amp; SANS 1475-1 Annex&nbsp;A</b>
           <span>Hose-reel replacement intervals, and weekly calibration of the workshop's production-control equipment against reference instruments.</span>
         </div>
       </div>
@@ -433,11 +432,11 @@
     <h2>Book a demo or ask a question</h2>
     <div class="contact-grid">
       <!--
-        This form posts to Formspree by default. Create a free form at
-        https://formspree.io, then replace {{FORM_ID}} below. Or, if you host on
-        Netlify, delete the action/method and add: <form name="contact" netlify>
+        This form posts to Formspree (form id xwlklgvw). To change it, create a
+        form at https://formspree.io and swap the id in the action below. Or, if
+        you host on Netlify, delete the action/method and add: <form name="contact" netlify>
       -->
-      <form class="contact" action="https://formspree.io/f/{{FORM_ID}}" method="POST">
+      <form class="contact" action="https://formspree.io/f/xwlklgvw" method="POST">
         <label for="f-name">Name</label>
         <input id="f-name" name="name" type="text" required autocomplete="name">
         <label for="f-company">Company</label>
@@ -451,11 +450,11 @@
 
       <dl class="contact-detail">
         <dt>Email</dt>
-        <dd><a href="mailto:hello@vigilfire.co.za">hello@vigilfire.co.za</a></dd>
-        <dt>Phone</dt>
-        <dd><a href="tel:+27000000000">+27 (0)00 000 0000</a></dd>
+        <dd><a href="mailto:vigilfire1@gmail.com">vigilfire1@gmail.com</a></dd>
+        <dt>Phone / WhatsApp</dt>
+        <dd><a href="tel:+27633994805">063 399 4805</a> &middot; <a href="https://wa.me/27633994805">WhatsApp</a></dd>
         <dt>Already a customer?</dt>
-        <dd><a href="https://app.vigilfire.co.za">Log in to Vigil Fire</a></dd>
+        <dd><a href="https://vigilfire.github.io/app/">Log in to Vigil Fire</a></dd>
       </dl>
     </div>
   </div>
@@ -474,11 +473,11 @@
         <a href="#how">How it works</a>
         <a href="#compliance">Compliance</a>
         <a href="#contact">Contact</a>
-        <a href="https://app.vigilfire.co.za">Log in</a>
+        <a href="https://vigilfire.github.io/app/">Log in</a>
       </nav>
     </div>
     <div class="fine">
-      &copy; <span id="year">2026</span> Vigil Fire. <!-- TODO: Vigil Fire is a product of {{Your company (Pty) Ltd}}. -->
+      &copy; <span id="year">2026</span> Vigil Fire. <!-- TODO: once the company is registered, add: Vigil Fire is a product of Vigil Fire (Pty) Ltd. -->
       Standards referenced (SANS 1475-1, SANS 10105-1, SANS 543) are published by the South African Bureau of Standards; Vigil Fire is an independent tool and is not endorsed by the SABS or SAQCC.
     </div>
   </div>

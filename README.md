@@ -22,13 +22,15 @@ Search `index.html` for `TODO` and `{{ }}`:
 
 | Placeholder | What to set |
 |---|---|
-| `https://app.vigilfire.co.za` | URL where the Vigil Fire app is actually deployed |
-| `hello@vigilfire.co.za` / `+27 (0)00 000 0000` | Your real contact details |
-| `{{FORM_ID}}` | A [Formspree](https://formspree.io) form id (free), **or** switch to Netlify Forms — see the comment above the `<form>` |
-| `{{Your company (Pty) Ltd}}` | The legal entity behind Vigil Fire, in the footer |
+| `https://app.vigilfire.co.za` | Done — "Log in" links point at `https://vigilfire.github.io/app/` |
+| _(contact details)_ | Done — email `vigilfire1@gmail.com`, phone/WhatsApp `063 399 4805` |
+| `{{FORM_ID}}` | Done — the contact form posts to Formspree form `xwlklgvw`. Swap the id in the `<form action>` to change it, **or** switch to Netlify Forms — see the comment above the `<form>` |
+| footer entity line | Deferred — company not yet registered; once "Vigil Fire (Pty) Ltd" is registered, uncomment the line in the footer |
 | `screens/*.png` | Real screenshots — replace each `<div class="ph">…</div>` with `<img src="screens/name.png" alt="…">` |
 | `og-image.png` | A 1200×630 preview image for social/link unfurls |
 | `<link rel="canonical">` / `og:url` | Your real domain |
+
+_Standards naming: the site consistently uses **SANS 1475-1** (not bare "SANS 1475")._
 
 ## Run locally
 
@@ -55,6 +57,6 @@ to `/` (root). Add the custom domain in the dashboard.
 | | Where |
 |---|---|
 | Marketing site (this repo) | `vigilfire.co.za` |
-| The app (`Fire-Equipment-Register` repo) | `app.vigilfire.co.za` |
+| The app (`Fire-Equipment-Register` repo) | `https://vigilfire.github.io/app/` (GitHub Pages) |
 
-The "Log in" links in this site should point at the app subdomain.
+The "Log in" links in this site point at the app's GitHub Pages URL.
